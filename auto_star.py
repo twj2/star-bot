@@ -4,7 +4,7 @@
 Auto Star Bot
 - 从环境变量 USER_TOKEN 读取 Personal Access Token (PAT)
 - 从环境变量 TARGET_USERS 或文件 targets.txt 读取要关注的 GitHub 用户列表
-- 每个用户只检查最近 N 个仓库（默认 10），若未 Star 则执行 Star 并判断是否为第一个 Star
+- 每个用户只检查最近 N 个仓库（默认 100），若未 Star 则执行 Star 并判断是否为第一个 Star
 """
 
 import os
@@ -41,8 +41,8 @@ def load_target_users():
         logging.error("未提供目标用户列表。请在环境变量 TARGET_USERS 中设置或在仓库根目录放置 targets.txt。")
         sys.exit(1)
 
-# 每个用户检查的仓库数量上限（默认 10）
-CHECK_LIMIT = int(os.getenv("CHECK_LIMIT", "10"))
+# 每个用户检查的仓库数量上限（默认 100）
+CHECK_LIMIT = int(os.getenv("CHECK_LIMIT", "100"))
 
 def main():
     g = Github(TOKEN, per_page=100)
